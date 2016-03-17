@@ -1,0 +1,6 @@
+node_modules
+error-logs.txt
+.credentials/*
+client_secret.json
+Archive.zip
+members.json
