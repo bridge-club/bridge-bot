@@ -1,11 +1,11 @@
 ```
-# ***************************
-# ***************************
-# **                       **
-# **  B R I D G E   B O T  **
-# **                       **
-# ***************************
-# ***************************
+***************************
+***************************
+**                       **
+**  B R I D G E   B O T  **
+**                       **
+***************************
+***************************
 ```
 
 Automated email alerts using text files in Dropbox as a datastore and the Gmail API, (currently) built in Node.js.
@@ -94,7 +94,7 @@ members.json:
 bridge-bot.txt (the "memory"):
 
 ```
-{"currentMember":{"id":1,"name":"Drumbo","surname":"","email":"drumbo@drums.com"},"cleaningScheduled":true,"dayTracker":5}
+{"currentMember":{"id":2,"name":"Drumbo","surname":"","email":"drumbo@drums.com"},"cleaningScheduled":true,"dayTracker":5}
 ```
 ```
 *****************
