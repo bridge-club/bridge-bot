@@ -9,7 +9,6 @@ var Gmailer = function() {
   var messageObj;
 
   this.sendMessage = function(credentials, clientSecret){
-    console.log('1');
     return new Promise(function(resolve, reject) {
       authorize(JSON.parse(credentials), JSON.parse(clientSecret), sendEmail);
       resolve();
@@ -17,7 +16,6 @@ var Gmailer = function() {
   }
 
   this.buildMessage = function(emailMessage) {
-        console.log('2');
     return new Promise(function(resolve, reject) {
       messageObj =  { headers: {
                       'To': emailMessage.recipients,
@@ -45,7 +43,6 @@ var Gmailer = function() {
   }
 
   function sendEmail(auth, messageObj, callback) {
-        console.log('4');
     var callback = callback || '';
     var email = '';
     var gmail = google.gmail('v1');
