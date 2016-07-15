@@ -1,3 +1,4 @@
+```
 # ***************************
 # ***************************
 # **                       **
@@ -5,6 +6,7 @@
 # **                       **
 # ***************************
 # ***************************
+```
 
 Automated email alerts using text files in Dropbox as a datastore and the Gmail API, (currently) built in Node.js.
 
@@ -46,16 +48,22 @@ If you can write code, feel free to contribute. If you want to make suggestions 
 ## Installation
 
 ``` git clone ``` this repo.
+
 ``` npm install ```
 
 create a Heroku app:
+
 ``` heroku create <your-app-name> --buildpack https://github.com/forty9er/heroku-buildpack-nodejs ```
+
 ``` git push heroku master ```
 
 set the BRIDGE_BOT_DROPBOX_ACCESS_TOKEN environment variable in your Heroku app.
+
 ** temporarily ** set an EMAIL environment variable, or edit lines 27 and 33 of bot.js to take a different variable/email address.
+
 set the [Heroku scheduler](https://elements.heroku.com/addons/scheduler) to run ``` npm start ``` every hour - or as often as suits you.
-optionally: set the timezone of your app in the CLI using the [TZ](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) format (ie. ``` heroku config:add TZ="Europe/London ```)
+
+optionally: set the timezone of your app in the CLI using the [TZ](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) format (ie. ``` heroku config:add TZ="Europe/London" ```)
 
 
 ## File formats:
@@ -88,7 +96,8 @@ bridge-bot.txt (the "memory"):
 ```
 {"currentMember":{"id":1,"name":"Drumbo","surname":"","email":"drumbo@drums.com"},"cleaningScheduled":true,"dayTracker":5}
 ```
-
+```
 *****************
 *  E N J O Y !  *
 *****************
+```
