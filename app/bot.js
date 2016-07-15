@@ -71,7 +71,6 @@ function nothingDoneToday() {
   return (currentState.dayTracker !== weekday);
 }
 
-// only do stuff if it's after 10am and only if we haven't done anything today.
 if (afterTen() && nothingDoneToday()) {  
   selectMessageContent().then(function(){
     gmailer.buildMessage(emailMessage).then(function(){
@@ -81,10 +80,6 @@ if (afterTen() && nothingDoneToday()) {
     })
   });
 } 
-// not sure we need this.
-//else {
-//  onlyTrackDay();
-//}
 
 // only do stuff on a Monday
 //if (weekday === 1) {
