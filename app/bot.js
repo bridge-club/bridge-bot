@@ -64,7 +64,7 @@ function fullName(currentMember) {
 }
 
 function footer() {
-  return "<br><br><p style='font-size:9px'><a href='https://github.com/bridge-club/bridge-bot'>Bridge-Bot</a> is open source and welcomes your suggestions and code contributions.</p>";
+  return "<br><br><p style=\"font-size:9px\"><a href=\"https://github.com/bridge-club/bridge-bot\">Bridge-Bot</a> is open source and welcomes your suggestions and code contributions.</p>";
 }
 
 function itsMonday() {
