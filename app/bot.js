@@ -68,7 +68,7 @@ function footer() {
 }
 
 function itsMonday() {
-  return (weekday === 1) {
+  return (weekday === 1);
 }
 
 function afterTen() {

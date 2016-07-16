@@ -20,7 +20,8 @@ Current version is little more than a spike, but it works and is plenty good eno
 
 ## Get involved
 
-If you can write code, feel free to contribute. If you want to make suggestions about functionality, those are also welcome.
+If you can write code, feel free to contribute some. 
+If you want to make suggestions about functionality, those are also very welcome.
 
 
 ## TODO: 
@@ -37,7 +38,7 @@ If you can write code, feel free to contribute. If you want to make suggestions 
 * [NodeJS](https://nodejs.org/en/)
 * [Heroku](http://www.heroku.com) account & [Heroku CLI toolbelt](https://toolbelt.heroku.com/) installed
 * [Dropbox](https://www.dropbox.com/) account 
-* [Dropbox access token](https://www.dropbox.com/developers) (stored in environment variables)
+* A [Dropbox application access token](https://www.dropbox.com/developers) (stored in environment variables)
 * [Gmail](https://www.gmail.com) account
 * [Google Gmail API client_secret.json](https://console.developers.google.com/flows/enableapi?apiid=gmail&pli=1) (stored in your named Dropbox app folder)
 * [Google gmail-node.js-quickstart.json](https://console.developers.google.com/flows/enableapi?apiid=gmail&pli=1) (stored in your named Dropbox app folder)
