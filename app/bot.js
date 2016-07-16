@@ -32,7 +32,7 @@ function selectMessageContent() {
     } else {
       emailMessage = {"recipients": process.env.EMAIL,
                       "subject": "Bridge club: Your cleaning shift is coming up, " + currentMember.name + "!",
-                      "body": "Your cleaning shift at the Bridge is coming up next week.<br><br>Please find time to do it with your bandmates within 7 days of next Monday.<br><br>If you need to buy cleaning supplies/toilet rolls etc. Graham should be able to reimburse you, might be worth a check this week to see what's already there so you can come prepared.<br><br><br>Sincerely,<br><br>Botty McBotface" + "<br><br><br><br><br><br><br>REAL RECIPIENT: " + members.getEmailAddressFor(currentMember.id -1 + "<br><br> " + footer())
+                      "body": "Your cleaning shift at the Bridge is coming up next week.<br><br>Please find time to do it with your bandmates within 7 days of next Monday.<br><br>If you need to buy cleaning supplies/toilet rolls etc. Graham should be able to reimburse you, might be worth a check this week to see what's already there so you can come prepared.<br><br><br>Sincerely,<br><br>Botty McBotface" + "<br><br><br><br><br><br><br>REAL RECIPIENT: " + members.getEmailAddressFor(currentMember.id -1) + footer()
                      };
       // real recipients should be: "recipients": members.getEmailAddressFor(currentMember.id -1),
     }
@@ -64,7 +64,7 @@ function fullName(currentMember) {
 }
 
 function footer() {
-  return "<br><br><p style=\"font-size:9px\"><a href=\"https://github.com/bridge-club/bridge-bot\">Bridge-Bot</a> is open source and welcomes your suggestions and code contributions.</p>";
+  return "<br><br><p style=\"font-size:11px;\"><a href=\"https://github.com/bridge-club/bridge-bot\">Bridge-Bot is open source</a> and welcomes your feature suggestions and code contributions.</p>";
 }
 
 function itsMonday() {
@@ -79,7 +79,7 @@ function nothingDoneToday() {
   return (currentState.dayTracker !== weekday);
 }
 
-//if (itsMonday() && afterTen() && nothingDoneToday()) {  
+if (itsMonday() && afterTen() && nothingDoneToday()) {  
   selectMessageContent().then(function(){
     gmailer.buildMessage(emailMessage).then(function(){
       gmailer.sendMessage(googleCredentials, googleClientSecret).then(function(){
@@ -87,4 +87,4 @@ function nothingDoneToday() {
       })
     })
   });
-//} 
+} 

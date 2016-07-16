@@ -24,7 +24,6 @@ var Gmailer = function() {
                       'From': 'BRIDGE BOT <bridge.club.bot@gmail.com>',
                       'Subject': emailMessage.subject,
                       'Content-Type': 'text/html; charset=utf-8; format=flowed',
-                      'Content-Transfer-Encoding': 'quoted-printable'
                       },
                     messageBody: emailMessage.body
                     };
