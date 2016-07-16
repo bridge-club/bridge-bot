@@ -79,7 +79,7 @@ function nothingDoneToday() {
   return (currentState.dayTracker !== weekday);
 }
 
-if (itsMonday() && afterTen() && nothingDoneToday()) {  
+if (/*itsMonday() && */afterTen() && nothingDoneToday()) {  
   selectMessageContent().then(function(){
     gmailer.buildMessage(emailMessage).then(function(){
       gmailer.sendMessage(googleCredentials, googleClientSecret).then(function(){
