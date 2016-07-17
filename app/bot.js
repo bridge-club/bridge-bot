@@ -24,17 +24,15 @@ var emailMessage;
 function selectMessageContent() {
   return new Promise(function(resolve, reject) {
     if (currentState.cleaningScheduled) {
-      emailMessage = {"recipients": process.env.EMAIL,
+      emailMessage = {"recipients": members.getAllEmailAddresses(),
                       "subject": "Bridge club: " + fullName(currentMember) + " is cleaning this week.",
-                      "body": fullName(currentMember) + " is cleaning this week." + "<br><br><br><br><br>REAL RECIPIENTS: " + members.getAllEmailAddresses() + footer()
+                      "body": fullName(currentMember) + " is cleaning this week.<br><br><br>Sincerely,<br><br>Botty McBotface" + footer()
                      };
-      // real recipients should be: "recipients": members.getAllEmailAddresses(),
     } else {
-      emailMessage = {"recipients": process.env.EMAIL,
+      emailMessage = {"recipients": members.getEmailAddressFor(currentMember.id -1),
                       "subject": "Bridge club: Your cleaning shift is coming up, " + currentMember.name + "!",
-                      "body": "Your cleaning shift at the Bridge is coming up next week.<br><br>Please find time to do it with your bandmates within 7 days of next Monday.<br><br>If you need to buy cleaning supplies/toilet rolls etc. Graham should be able to reimburse you, might be worth a check this week to see what's already there so you can come prepared.<br><br><br>Sincerely,<br><br>Botty McBotface" + "<br><br><br><br><br><br><br>REAL RECIPIENT: " + members.getEmailAddressFor(currentMember.id -1) + footer()
+                      "body": "Your cleaning shift at the Bridge is coming up next week.<br><br>Please find time to do it with your bandmates within 7 days of next Monday.<br><br>If you need to buy cleaning supplies/toilet rolls etc. Graham should be able to reimburse you, might be worth a check this week to see what's already there so you can come prepared.<br><br><br>Sincerely,<br><br>Botty McBotface" + footer()
                      };
-      // real recipients should be: "recipients": members.getEmailAddressFor(currentMember.id -1),
     }
   resolve();
   });  
@@ -79,7 +77,7 @@ function nothingDoneToday() {
   return (currentState.dayTracker !== weekday);
 }
 
-if (/*itsMonday() && */afterTen() && nothingDoneToday()) {  
+if (itsMonday() && afterTen() && nothingDoneToday()) {  
   selectMessageContent().then(function(){
     gmailer.buildMessage(emailMessage).then(function(){
       gmailer.sendMessage(googleCredentials, googleClientSecret).then(function(){

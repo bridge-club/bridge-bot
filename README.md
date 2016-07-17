@@ -1,11 +1,10 @@
 ```
-***************************
-***************************
-**                       **
-**  B R I D G E   B O T  **
-**                       **
-***************************
-***************************
+ ______     ______     __     _____     ______     ______        ______     ______     ______ 
+/\  == \   /\  == \   /\ \   /\  __-.  /\  ___\   /\  ___\      /\  == \   /\  __ \   /\__  _\
+\ \  __<   \ \  __<   \ \ \  \ \ \/\ \ \ \ \__ \  \ \  __\      \ \  __<   \ \ \/\ \  \/_/\ \/
+ \ \_____\  \ \_\ \_\  \ \_\  \ \____-  \ \_____\  \ \_____\     \ \_____\  \ \_____\    \ \_\
+  \/_____/   \/_/ /_/   \/_/   \/____/   \/_____/   \/_____/      \/_____/   \/_____/     \/_/
+
 ```
 
 Automated email alerts using text files in Dropbox as a datastore and the Gmail API, (currently) built in Node.js.
@@ -60,7 +59,7 @@ create a Heroku app:
 
 set the BRIDGE_BOT_DROPBOX_ACCESS_TOKEN environment variable in your Heroku app.
 
-** temporarily ** set an EMAIL environment variable, or edit lines 27 and 33 of bot.js to take a different variable/email address.
+an EMAIL environment variable is used to add some hard-coded email addresses to the BCC field in the Gmailer buildMessage() function.
 
 set the [Heroku scheduler](https://elements.heroku.com/addons/scheduler) to run ``` npm start ``` every hour - or as often as suits you.
 
