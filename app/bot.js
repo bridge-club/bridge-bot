@@ -38,18 +38,22 @@ function selectMessageContent() {
   });  
 }
 
+function getNextMember() {
+  var nextMember;
+  if (currentMember.id < members.memberList.length) {
+    nextMember = members.memberList[currentMember.id];
+  } else {
+    nextMember = members.memberList[0];
+  }
+  currentState.currentMember = nextMember;
+}
+
+function toggleCleaningScheduled() {
+  currentState.cleaningScheduled = !(currentState.cleaningScheduled);
+}
+
 function updateDropbox() {
   currentState.dayTracker = weekday;
-  if (currentState.cleaningScheduled) {
-    var nextMember;
-    if (currentMember.id < members.memberList.length) {
-      nextMember = members.memberList[currentMember.id];
-    } else {
-      nextMember = members.memberList[0];
-    }
-    currentState.currentMember = nextMember;
-  }
-  currentState.cleaningScheduled = !(currentState.cleaningScheduled)
   dropbox.writeFile("bridge-bot.txt", JSON.stringify(currentState), true);
 }
 
@@ -81,8 +85,13 @@ if (itsMonday() && afterTen() && nothingDoneToday()) {
   selectMessageContent().then(function(){
     gmailer.buildMessage(emailMessage).then(function(){
       gmailer.sendMessage(googleCredentials, googleClientSecret).then(function(){
-        updateDropbox();        
-      })
-    })
+        if (currentState.cleaningScheduled) {
+            getNextMember();
+        }
+        toggleCleaningScheduled();
+      });
+    });
   });
-} 
+}
+
+updateDropbox(); 
