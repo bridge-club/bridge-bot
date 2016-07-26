@@ -95,6 +95,6 @@ if (afterTen() && nothingDoneToday()) {
         });
       });
     });
-  updateDropbox();
   }
+  updateDropbox();
 }
