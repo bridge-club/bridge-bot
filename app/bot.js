@@ -1,3 +1,5 @@
+"use strict";
+
 var Dropbox = require('./dropbox.js');
 var Gmailer = require('./gmailer.js');
 var Members = require('./members.js');
@@ -93,5 +95,6 @@ if (afterTen() && nothingDoneToday()) {
         });
       });
     });
-  updateDropbox(); 
+  updateDropbox();
+  }
 }
