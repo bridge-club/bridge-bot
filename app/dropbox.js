@@ -2,7 +2,6 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 var Dropbox = function() {
     this.accessToken = process.env.BRIDGE_BOT_DROPBOX_ACCESS_TOKEN;
-    this.fileData;
 };
 
 Dropbox.prototype.writeFile = function(fileNameToWrite, fileContentToWrite, async) {
@@ -18,14 +17,14 @@ Dropbox.prototype.writeFile = function(fileNameToWrite, fileContentToWrite, asyn
     if (xhttp.readyState === 4 && xhttp.status === 200) {
       console.log("file: " + fileNameToWrite + " has been written");
       console.log("file contents: " + fileContentToWrite + "\n");
-      result = "OK"
+      result = "OK";
     } else if (xhttp.readyState === 4 && xhttp.status !== 200) {
       console.log("There was a problem writing " + fileNameToWrite + "\n");
-      result = "Error"
+      result = "Error";
     }
   };
   return result;
-}
+};
 
 Dropbox.prototype.readFile = function(fileNameToRead, async) {
     var xhttp = new XMLHttpRequest();
@@ -43,6 +42,6 @@ Dropbox.prototype.readFile = function(fileNameToRead, async) {
       console.log("There was a problem reading " + fileNameToRead + "\n");
     }
  return result;
-}
+};
 
 module.exports = Dropbox;

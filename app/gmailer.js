@@ -13,7 +13,7 @@ var Gmailer = function() {
       authorize(JSON.parse(credentials), JSON.parse(clientSecret), sendEmail);
       resolve();
     });
-  }
+  };
 
   this.buildMessage = function(emailMessage) {
     return new Promise(function(resolve, reject) {
@@ -29,7 +29,7 @@ var Gmailer = function() {
                     };
       resolve();
     });
-  }
+  };
 
   function authorize(token, credentials, callback) {    
     var clientSecret = credentials.installed.client_secret;
