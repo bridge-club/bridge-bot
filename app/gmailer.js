@@ -21,7 +21,7 @@ var Gmailer = function() {
                       'To': emailMessage.recipients,
                       // 'CC': 'someone else',
                       'BCC': process.env.EMAIL,
-                      'From': 'BRIDGE BOT <bridge.club.bot@gmail.com>',
+                      'From': 'Bridge Bot <bridge.club.bot@gmail.com>',
                       'Subject': emailMessage.subject,
                       'Content-Type': 'text/html; charset=utf-8; format=flowed',
                       },
