@@ -83,8 +83,8 @@ function nothingDoneToday() {
   return (currentState.dayTracker !== weekday);
 }
 
-if (afterTen() && nothingDoneToday()) {  
-  if (itsMonday()) {
+// if (afterTen() && nothingDoneToday()) {  
+//   if (itsMonday()) {
     selectMessageContent().then(function(){
       gmailer.buildMessage(emailMessage).then(function(){
         gmailer.sendMessage(googleCredentials, googleClientSecret).then(function(){
@@ -95,6 +95,6 @@ if (afterTen() && nothingDoneToday()) {
         });
       });
     });
-  }
+  // }
   updateDropbox();
-}
+// }
