@@ -98,6 +98,3 @@ if (afterTen() && nothingDoneToday()) {
   }
   updateDropbox();
 }
-
-// logging this because I don't think it's working properly:
-console.log(currentState);
