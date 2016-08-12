@@ -24,7 +24,7 @@ const currentMember = currentState.currentMember;
 let emailMessage;
 
 const selectMessageContent = () => {
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     if (currentState.cleaningScheduled) {
       emailMessage = {"recipients": members.getAllEmailAddresses(),
                       "subject": "Bridge club: " + fullName(currentMember) + " is cleaning this week.",
@@ -38,7 +38,7 @@ const selectMessageContent = () => {
     }
   resolve();
   });  
-}
+};
 
 const getNextMember = () => {
   let nextMember;
@@ -48,40 +48,40 @@ const getNextMember = () => {
     nextMember = members.memberList[0];
   }
   currentState.currentMember = nextMember;
-}
+};
 
 const toggleCleaningScheduled = () => {
   currentState.cleaningScheduled = !(currentState.cleaningScheduled);
-}
+};
 
 const updateDropbox = () => {
   currentState.dayTracker = weekday;
   dropbox.writeFile("bridge-bot.txt", JSON.stringify(currentState), true);
-}
+};
 
 const fullName = (currentMember) => {
-  const name = currentMember.name;
+  let name = currentMember.name;
   if (currentMember.surname !== "") {
     name += (" " + currentMember.surname);
   }
   return name;
-}
+};
 
 const footer = () => {
   return "<br><br><p style=\"font-size:11px;\"><a href=\"https://github.com/bridge-club/bridge-bot\">Bridge-Bot is open source</a> and welcomes your feature suggestions and code contributions.</p>";
-}
+};
 
 const itsMonday = () => {
   return (weekday === 1);
-}
+};
 
 const afterTen = () => {
   return (hour >= 10);
-}
+};
 
 const nothingDoneToday = () => {
   return (currentState.dayTracker !== weekday);
-}
+};
 
 if (afterTen() && nothingDoneToday()) {  
   if (itsMonday()) {
