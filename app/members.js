@@ -1,11 +1,11 @@
-var Members = function() {
+const Members = function() {
   this.memberList = [];
   this.selectedMemberIndex = -1;
 };
 
 Members.prototype.getMemberList = function(membersMap) {
-  var membersData = JSON.parse(membersMap);
-  for (var i=0; i<membersData.members.length; i++) {
+  const membersData = JSON.parse(membersMap);
+  for (let i=0; i<membersData.members.length; i++) {
     this.memberList.push(membersData.members[i]);
   }
 };
@@ -19,7 +19,7 @@ Members.prototype.getEmailAddressFor = function(index) {
 };
 
 Members.prototype.getAllEmailAddresses = function() {
-  var emailAddresses = [];
+  let emailAddresses = [];
   this.memberList.forEach(function(member) {
     emailAddresses.push(member.email);
   });

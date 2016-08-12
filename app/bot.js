@@ -1,29 +1,29 @@
 "use strict";
 
-var Dropbox = require('./dropbox.js');
-var Gmailer = require('./gmailer.js');
-var Members = require('./members.js');
+const Dropbox = require('./dropbox.js');
+const Gmailer = require('./gmailer.js');
+const Members = require('./members.js');
 
-var dropbox = new Dropbox();
-var gmailer = new Gmailer();
-var members = new Members();
+const dropbox = new Dropbox();
+const gmailer = new Gmailer();
+const members = new Members();
 
-var date = new Date();
-var weekday = date.getDay();
-var hour = date.getHours();
+const date = new Date();
+const weekday = date.getDay();
+const hour = date.getHours();
 
-var googleCredentials = dropbox.readFile("gmail-nodejs-quickstart.json", false);
-var googleClientSecret = dropbox.readFile("client_secret.json", false);
+const googleCredentials = dropbox.readFile("gmail-nodejs-quickstart.json", false);
+const googleClientSecret = dropbox.readFile("client_secret.json", false);
 
-var membersMap = dropbox.readFile("members.json", false);
+const membersMap = dropbox.readFile("members.json", false);
 members.getMemberList(membersMap);
 
-var currentState = JSON.parse(dropbox.readFile("bridge-bot.txt", false)); 
-var currentMember = currentState.currentMember;
+const currentState = JSON.parse(dropbox.readFile("bridge-bot.txt", false)); 
+const currentMember = currentState.currentMember;
 
-var emailMessage;
+let emailMessage;
 
-function selectMessageContent() {
+const selectMessageContent = () => {
   return new Promise(function(resolve, reject) {
     if (currentState.cleaningScheduled) {
       emailMessage = {"recipients": members.getAllEmailAddresses(),
@@ -40,8 +40,8 @@ function selectMessageContent() {
   });  
 }
 
-function getNextMember() {
-  var nextMember;
+const getNextMember = () => {
+  let nextMember;
   if (currentMember.id < members.memberList.length) {
     nextMember = members.memberList[currentMember.id];
   } else {
@@ -50,44 +50,44 @@ function getNextMember() {
   currentState.currentMember = nextMember;
 }
 
-function toggleCleaningScheduled() {
+const toggleCleaningScheduled = () => {
   currentState.cleaningScheduled = !(currentState.cleaningScheduled);
 }
 
-function updateDropbox() {
+const updateDropbox = () => {
   currentState.dayTracker = weekday;
   dropbox.writeFile("bridge-bot.txt", JSON.stringify(currentState), true);
 }
 
-function fullName(currentMember) {
-  var name = currentMember.name;
+const fullName = (currentMember) => {
+  const name = currentMember.name;
   if (currentMember.surname !== "") {
     name += (" " + currentMember.surname);
   }
   return name;
 }
 
-function footer() {
+const footer = () => {
   return "<br><br><p style=\"font-size:11px;\"><a href=\"https://github.com/bridge-club/bridge-bot\">Bridge-Bot is open source</a> and welcomes your feature suggestions and code contributions.</p>";
 }
 
-function itsMonday() {
+const itsMonday = () => {
   return (weekday === 1);
 }
 
-function afterTen() {
+const afterTen = () => {
   return (hour >= 10);
 }
 
-function nothingDoneToday() {
+const nothingDoneToday = () => {
   return (currentState.dayTracker !== weekday);
 }
 
 if (afterTen() && nothingDoneToday()) {  
   if (itsMonday()) {
-    selectMessageContent().then(function(){
-      gmailer.buildMessage(emailMessage).then(function(){
-        gmailer.sendMessage(googleCredentials, googleClientSecret).then(function(){
+    selectMessageContent().then(() => {
+      gmailer.buildMessage(emailMessage).then(() => {
+        gmailer.sendMessage(googleCredentials, googleClientSecret).then(() => {
           if (currentState.cleaningScheduled) {
               getNextMember();
           }

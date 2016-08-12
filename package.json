@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "bot for messaging bridge club members",
   "engines": {
-    "node": "4.2.2"
+    "node": "6.3.1"
   },
   "main": "",
   "scripts": {

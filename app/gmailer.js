@@ -1,12 +1,12 @@
-var Gmailer = function() {  
-  var fs = require('fs');
-  var google = require('googleapis');
-  var googleAuth = require('google-auth-library');
-  var btoa = require('btoa');
+const Gmailer = function() {  
+  const fs = require('fs');
+  const google = require('googleapis');
+  const googleAuth = require('google-auth-library');
+  const btoa = require('btoa');
 
-  var SCOPES = ['https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/gmail.send'];
+  const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly', 'https://www.googleapis.com/auth/gmail.send'];
 
-  var messageObj;
+  let messageObj;
 
   this.sendMessage = function(credentials, clientSecret){
     return new Promise(function(resolve, reject) {
@@ -32,19 +32,19 @@ var Gmailer = function() {
   };
 
   function authorize(token, credentials, callback) {    
-    var clientSecret = credentials.installed.client_secret;
-    var clientId = credentials.installed.client_id;
-    var redirectUrl = credentials.installed.redirect_uris[0];
-    var auth = new googleAuth();
-    var oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
+    const clientSecret = credentials.installed.client_secret;
+    const clientId = credentials.installed.client_id;
+    const redirectUrl = credentials.installed.redirect_uris[0];
+    const auth = new googleAuth();
+    const oauth2Client = new auth.OAuth2(clientId, clientSecret, redirectUrl);
     oauth2Client.credentials = token;
     callback(oauth2Client, messageObj);
   }
 
   function sendEmail(auth, messageObj, callback) {
-    var callback = callback || '';
-    var email = '';
-    var gmail = google.gmail('v1');
+    const gmail = google.gmail('v1');
+    const cb = callback || '';
+    let email = '';
     for(var header in messageObj.headers) {
       email += header += ": "+messageObj.headers[header]+"\r\n";
     }

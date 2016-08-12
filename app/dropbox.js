@@ -1,24 +1,24 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-var Dropbox = function() {
+const Dropbox = function() {
     this.accessToken = process.env.BRIDGE_BOT_DROPBOX_ACCESS_TOKEN;
 };
 
 Dropbox.prototype.writeFile = function(fileNameToWrite, fileContentToWrite, async) {
-  var result;
-  var xhttp = new XMLHttpRequest();
-  xhttp.open("POST", "https://content.dropboxapi.com/2/files/upload", async);
-  xhttp.setRequestHeader("Authorization", "Bearer " + this.accessToken);
-  xhttp.setRequestHeader("Dropbox-API-Arg", "{\"path\": \"/" + fileNameToWrite + "\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}");
-  xhttp.setRequestHeader("Content-Type", "text/plain; charset=dropbox-cors-hack");
-  xhttp.send(fileContentToWrite);
+  let result;
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://content.dropboxapi.com/2/files/upload", async);
+  xhr.setRequestHeader("Authorization", "Bearer " + this.accessToken);
+  xhr.setRequestHeader("Dropbox-API-Arg", "{\"path\": \"/" + fileNameToWrite + "\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}");
+  xhr.setRequestHeader("Content-Type", "text/plain; charset=dropbox-cors-hack");
+  xhr.send(fileContentToWrite);
 
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState === 4 && xhttp.status === 200) {
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
       console.log("file: " + fileNameToWrite + " has been written");
       console.log("file contents: " + fileContentToWrite + "\n");
       result = "OK";
-    } else if (xhttp.readyState === 4 && xhttp.status !== 200) {
+    } else if (xhr.readyState === 4 && xhr.status !== 200) {
       console.log("There was a problem writing " + fileNameToWrite + "\n");
       result = "Error";
     }
@@ -27,18 +27,18 @@ Dropbox.prototype.writeFile = function(fileNameToWrite, fileContentToWrite, asyn
 };
 
 Dropbox.prototype.readFile = function(fileNameToRead, async) {
-    var xhttp = new XMLHttpRequest();
-    var result;
-    xhttp.open("POST", "https://content.dropboxapi.com/2/files/download", async);
-    xhttp.setRequestHeader("Authorization", "Bearer " + this.accessToken);
-    xhttp.setRequestHeader("Dropbox-API-Arg", "{\"path\": \"/" + fileNameToRead + "\"}");
-    xhttp.send();
+    const xhr = new XMLHttpRequest();
+    let result;
+    xhr.open("POST", "https://content.dropboxapi.com/2/files/download", async);
+    xhr.setRequestHeader("Authorization", "Bearer " + this.accessToken);
+    xhr.setRequestHeader("Dropbox-API-Arg", "{\"path\": \"/" + fileNameToRead + "\"}");
+    xhr.send();
 
-    if (xhttp.readyState === 4 && xhttp.status === 200) {
+    if (xhr.readyState === 4 && xhr.status === 200) {
       console.log("file: " + fileNameToRead + " has been read.");
-      console.log("file contents: " + xhttp.responseText + "\n");
-      result = xhttp.responseText;
-    } else if (xhttp.readyState === 4 && xhttp.status !== 200) {
+      console.log("file contents: " + xhr.responseText + "\n");
+      result = xhr.responseText;
+    } else if (xhr.readyState === 4 && xhr.status !== 200) {
       console.log("There was a problem reading " + fileNameToRead + "\n");
     }
  return result;
