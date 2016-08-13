@@ -71,7 +71,7 @@ const itsMonday = () => {
   return (weekday === 1);
 };
 
-const afterTen = () => {
+const itsAfterTen = () => {
   return (hour >= 10);
 };
 
@@ -79,7 +79,7 @@ const nothingDoneToday = () => {
   return (currentState.dayTracker !== weekday);
 };
 
-if (afterTen() && nothingDoneToday()) {  
+if (itsAfterTen() && nothingDoneToday()) {  
   if (itsMonday()) {
     selectMessageContent().then(() => {
       buildMessage(emailMessage).then(() => {
