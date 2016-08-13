@@ -1,24 +1,22 @@
 "use strict";
 
-const Dropbox = require('./dropbox.js');
-const Gmailer = require('./gmailer.js');
+const {readFile, writeFile} = require('./dropbox.js');
+const {buildMessage, sendMessage} = require('./gmailer.js');
 const Members = require('./members.js');
 
-const dropbox = new Dropbox();
-const gmailer = new Gmailer();
 const members = new Members();
 
 const date = new Date();
 const weekday = date.getDay();
 const hour = date.getHours();
 
-const googleCredentials = dropbox.readFile("gmail-nodejs-quickstart.json", false);
-const googleClientSecret = dropbox.readFile("client_secret.json", false);
+const googleCredentials = readFile("gmail-nodejs-quickstart.json", false);
+const googleClientSecret = readFile("client_secret.json", false);
 
-const membersMap = dropbox.readFile("members.json", false);
+const membersMap = readFile("members.json", false);
 members.getMemberList(membersMap);
 
-const currentState = JSON.parse(dropbox.readFile("bridge-bot.txt", false)); 
+const currentState = JSON.parse(readFile("bridge-bot.txt", false)); 
 const currentMember = currentState.currentMember;
 
 let emailMessage;
@@ -56,7 +54,7 @@ const toggleCleaningScheduled = () => {
 
 const updateDropbox = () => {
   currentState.dayTracker = weekday;
-  dropbox.writeFile("bridge-bot.txt", JSON.stringify(currentState), true);
+  writeFile("bridge-bot.txt", JSON.stringify(currentState), true);
 };
 
 const fullName = (currentMember) => {
@@ -86,8 +84,8 @@ const nothingDoneToday = () => {
 if (afterTen() && nothingDoneToday()) {  
   if (itsMonday()) {
     selectMessageContent().then(() => {
-      gmailer.buildMessage(emailMessage).then(() => {
-        gmailer.sendMessage(googleCredentials, googleClientSecret).then(() => {
+      buildMessage(emailMessage).then(() => {
+        sendMessage(googleCredentials, googleClientSecret).then(() => {
           if (currentState.cleaningScheduled) {
               getNextMember();
           }
@@ -96,5 +94,5 @@ if (afterTen() && nothingDoneToday()) {
       });
     });
   }
-  updateDropbox();
+ updateDropbox();
 }
