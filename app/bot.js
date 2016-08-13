@@ -5,10 +5,8 @@ const {buildMessage, sendMessage} = require('./gmailer.js');
 const Members = require('./members.js');
 
 const members = new Members();
-
-const date = new Date();
-const weekday = date.getDay();
-const hour = date.getHours();
+const weekday = new Date().getDay();
+const hour = new Date().getHours();
 
 const googleCredentials = readFile("gmail-nodejs-quickstart.json", false);
 const googleClientSecret = readFile("client_secret.json", false);
