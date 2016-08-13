@@ -16,16 +16,17 @@ class Gmailer {
 
   static buildMessage(emailMessage) {
     return new Promise(function(resolve, reject) {
-      messageObj =  { headers: {
-                      'To': emailMessage.recipients,
-                      // 'CC': 'someone else',
-                      'BCC': process.env.EMAIL,
-                      'From': 'Bridge Bot <bridge.club.bot@gmail.com>',
-                      'Subject': emailMessage.subject,
-                      'Content-Type': 'text/html; charset=utf-8; format=flowed',
-                      },
-                    messageBody: emailMessage.body
-                    };
+      messageObj =  { 
+        headers: {
+          'To': emailMessage.recipients,
+          // 'CC': 'someone else',
+          'BCC': process.env.EMAIL,
+          'From': 'Bridge Bot <bridge.club.bot@gmail.com>',
+          'Subject': emailMessage.subject,
+          'Content-Type': 'text/html; charset=utf-8; format=flowed',
+        },
+        messageBody: emailMessage.body
+      };
       resolve();
     });
   }
