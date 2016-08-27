@@ -8,14 +8,10 @@ let messageObj= '';
 class Gmailer {  
 
   static sendMessage(credentials, clientSecret) {
-    return new Promise(function(resolve, reject) {
       authorize(JSON.parse(credentials), JSON.parse(clientSecret), sendEmail);
-      resolve();
-    });
   }
 
   static buildMessage(emailMessage) {
-    return new Promise(function(resolve, reject) {
       messageObj =  { 
         headers: {
           'To': emailMessage.recipients,
@@ -27,8 +23,6 @@ class Gmailer {
         },
         messageBody: emailMessage.body
       };
-      resolve();
-    });
   }
 }
 

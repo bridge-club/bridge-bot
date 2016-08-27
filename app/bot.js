@@ -14,28 +14,24 @@ const googleClientSecret = readFile("client_secret.json", false);
 const membersMap = readFile("members.json", false);
 members.getMemberList(membersMap);
 
-const currentState = JSON.parse(readFile("bridge-bot.txt", false)); 
-const currentMember = currentState.currentMember;
-
-let emailMessage;
+let currentState = JSON.parse(readFile("bridge-bot.txt", false)); 
+let currentMember = currentState.currentMember;
+let emailMessage = "";
 
 const selectMessageContent = () => {
-  return new Promise((resolve, reject) => {
-    if (currentState.cleaningScheduled) {
-      emailMessage = {
-        "recipients": members.getAllEmailAddresses(),
-        "subject": "Bridge club: " + fullName(currentMember) + " is cleaning this week.",
-        "body": fullName(currentMember) + " is cleaning this week.<br><br><br>Sincerely,<br><br>Botty McBotface" + footer()
-      };
-    } else {
-      emailMessage = {
-        "recipients": members.getEmailAddressFor(currentMember.id -1),
-        "subject": "Bridge club: Your cleaning shift is coming up, " + currentMember.name + "!",
-        "body": "Your cleaning shift at the Bridge is coming up next week.<br><br>Please find time to do it with your bandmates within 7 days of next Monday.<br><br>If you need to buy cleaning supplies/toilet rolls etc. Graham should be able to reimburse you, might be worth a check this week to see what's already there so you can come prepared.<br><br><br>Sincerely,<br><br>Botty McBotface" + footer()
-      };
-    }
-  resolve();
-  });  
+  if (currentState.cleaningScheduled) {
+    emailMessage = {
+      "recipients": members.getAllEmailAddresses(),
+      "subject": "Bridge club: " + fullName(currentMember) + " is cleaning this week.",
+      "body": fullName(currentMember) + " is cleaning this week.<br><br><br>Sincerely,<br><br>Botty McBotface" + footer()
+    };
+  } else {
+    emailMessage = {
+      "recipients": members.getEmailAddressFor(currentMember.id -1),
+      "subject": "Bridge club: Your cleaning shift is coming up, " + currentMember.name + "!",
+      "body": "Your cleaning shift at the Bridge is coming up next week.<br><br>Please find time to do it with your bandmates within 7 days of next Monday.<br><br>If you need to buy cleaning supplies/toilet rolls etc. Graham should be able to reimburse you, might be worth a check this week to see what's already there so you can come prepared.<br><br><br>Sincerely,<br><br>Botty McBotface" + footer()
+    };
+  }
 };
 
 const getNextMember = () => {
@@ -83,16 +79,13 @@ const nothingDoneToday = () => {
 
 if (itsAfterTen() && nothingDoneToday()) {  
   if (itsMonday()) {
-    selectMessageContent().then(() => {
-      buildMessage(emailMessage).then(() => {
-        sendMessage(googleCredentials, googleClientSecret).then(() => {
-          if (currentState.cleaningScheduled) {
-              getNextMember();
-          }
-          toggleCleaningScheduled();
-        });
-      });
-    });
+    selectMessageContent();
+    buildMessage(emailMessage);
+    sendMessage(googleCredentials, googleClientSecret);
+    if (currentState.cleaningScheduled) {
+      getNextMember();
+    }
+    toggleCleaningScheduled();        
   }
- updateDropbox();
+  updateDropbox();
 }
