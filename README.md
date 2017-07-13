@@ -23,7 +23,7 @@ If you can write code, feel free to contribute some.
 If you want to make suggestions about functionality, those are also very welcome.
 
 
-## TODO: 
+## TODO: 
 
 * Better testing.
 * Design improvements / refactoring.
@@ -66,7 +66,7 @@ set the [Heroku scheduler](https://elements.heroku.com/addons/scheduler) to run 
 optionally: set the timezone of your app in the CLI using the [TZ](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) format (ie. ``` heroku config:add TZ="Europe/London" ```)
 
 
-## File formats:
+## File formats:
 
 members.json:
 
@@ -94,7 +94,16 @@ members.json:
 bridge-bot.txt (the "memory"):
 
 ```
-{"currentMember":{"id":2,"name":"Drumbo","surname":"","email":"drumbo@drums.com"},"cleaningScheduled":true,"dayTracker":5}
+{
+    "currentMember": {
+        "id": 2,
+        "name": "Drumbo",
+        "surname": "",
+        "email": "drumbo@drums.com"
+    },
+    "cleaningScheduled": true,
+    "dayTracker": 5
+}
 ```
 ```
 *****************
