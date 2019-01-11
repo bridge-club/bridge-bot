@@ -6,11 +6,14 @@
   \/_____/   \/_/ /_/   \/_/   \/____/   \/_____/   \/_____/      \/_____/   \/_____/     \/_/
 
 ```
+## Abandoned
 
-Automated email alerts using text files in Dropbox as a datastore and the Gmail API, (currently) built in Node.js.
+This project has been abandoned. Firstly, I rewrote it in Kotlin (with tests) as a job for [Shiny shiny, shiny boots of leather](https://github.com/endofhome/shiny-shiny-shiny-boots-of-leather/tree/master/src/main/kotlin/jobs/CleaningRotaGmailerJob). Secondly, I left the club and apparently nobody had an interest in working on it. 
 
 
 ## About
+
+Automated email alerts using text files in Dropbox as a datastore and the Gmail API, (currently) built in Node.js.
 
 BRIDGE-BOT is an automated messaging system. It consumes a list of club members' names and email addresses (in JSON format) from a file in Dropbox. Every week it prepares an email - either to one member or all members - and then emails it using its own Gmail account and the Gmail API (Google auth secrets are also read from JSON files in Dropbox). Hosted in Heroku, it uses a 'custom' Node buildpack (no web process) and the Heroku scheduler set to run a single process every hour. It then checks whether it needs to do anything, depending on the time of day and whether it has done anything that day, then either writes and sends a message, or shuts down. The bot is built and destroyed once every hour, so it reads and writes to another file in Dropbox to store the state of the application.
 
@@ -53,7 +56,7 @@ If you want to make suggestions about functionality, those are also very welcome
 
 create a Heroku app:
 
-``` heroku create <your-app-name> --buildpack https://github.com/forty9er/heroku-buildpack-nodejs ```
+``` heroku create <your-app-name> --buildpack https://github.com/endofhome/heroku-buildpack-nodejs ```
 
 ``` git push heroku master ```
 
